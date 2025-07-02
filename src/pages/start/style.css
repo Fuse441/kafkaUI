@@ -1,0 +1,66 @@
+/* Reset default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(145deg, #e0e0e0, #ffffff);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.login-form input:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-form button:hover {
+  background-color: #3c7bd0;
+}
+
+.register {
+    margin: 20px 0 0;
+    cursor: pointer;
+}
