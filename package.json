@@ -5,20 +5,31 @@
   "type": "commonjs",
   "main": "src/main.js",
   "scripts": {
-    "start": "NODE_ENV=development electron . "
+    "start": "DISPLAY=\"${DISPLAY:=:0}\" NODE_ENV=development electron . ",
+    "build": "bun build src/main.js --outfile=dist/main.js --target=node",
+    "dist": "electron-builder"
   },
-  "dependencies": {
-    "bun-plugin-tailwind": "^0.0.14",
-    "dotenv": "^17.0.0",
+  "build": {
+    "appId": "com.thanos.kafka",
+    "productName": "kafkaUI",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
     "electron": "^36.5.0",
     "electron-reloader": "^1.2.3",
-    "react": "^19",
-    "react-dom": "^19",
-    "tailwindcss": "^4.0.6"
-  },
-  "devDependencies": {
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "electron-builder": "^26.0.12"
   }
 }

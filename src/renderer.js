@@ -1,7 +1,20 @@
 import { validateToken } from './utils/validation.js';
+import { Dialog } from './components/dialog/dialog.js';
+const pageButtons = document.querySelectorAll('[id^="page_"]');
+
+pageButtons.forEach(button => {
+  const pageName = button.id.replace('page_', '');
+  button.addEventListener('click', () => {
+    console.log("pageName ==> ", pageName);
+
+    loadPage(pageName);
+  });
+});
+
+
+
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const foundToken = validateToken();
 
 
 
@@ -9,9 +22,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   if (!appElement) return;
 
   try {
-    if (!foundToken) {
-      loadPage('start');
-    }
+    const cssHref = `./style.css`;
+    const cssLink = document.createElement('link');
+    cssLink.rel = 'stylesheet';
+    cssLink.href = cssHref;
+    document.head.appendChild(cssLink);
+    loadPage('start');
+
 
 
   } catch (err) {
@@ -21,9 +38,15 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-function loadPage(page) {
+export function loadPage(page, cmd, argv) {
   const appElement = document.querySelector("app");
   if (!appElement) return;
+
+  // Remove previously loaded page CSS
+  const prevCss = document.querySelector('link[data-page-style]');
+  if (prevCss) prevCss.remove();
+
+  // appElement.innerHTML = '<p style="color:gray;">Loading...</p>';
 
   fetch(`./pages/${page}/${page}.html`)
     .then(response => response.text())
@@ -32,22 +55,26 @@ function loadPage(page) {
 
       // Load CSS
       const cssHref = `./pages/${page}/style.css`;
-      const existingLink = document.querySelector(`link[href="${cssHref}"]`);
-      if (!existingLink) {
-        const cssLink = document.createElement('link');
-        cssLink.rel = 'stylesheet';
-        cssLink.href = cssHref;
-        document.head.appendChild(cssLink);
-      }
+      const cssLink = document.createElement('link');
+      cssLink.rel = 'stylesheet';
+      cssLink.href = cssHref;
+      cssLink.setAttribute('data-page-style', page);
+      document.head.appendChild(cssLink);
 
-      // Load JS
-      const script = document.createElement('script');
-      // script.type = 'module';
-      script.src = `./pages/${page}/${page}.js`;
-      document.body.appendChild(script);
+      // Load JS as module dynamically
+      import(`./pages/${page}/${page}.js`)
+        .then(module => {
+          if (typeof module.initPage === 'function') {
+            module.initPage(cmd, argv);
+          }
+        })
+        .catch(err => {
+          console.error(`Error loading module for ${page}:`, err);
+        });
     })
     .catch(err => {
       console.error(`Error loading ${page} page:`, err);
       appElement.innerHTML = '<p style="color:red;">Failed to load content.</p>';
     });
 }
+

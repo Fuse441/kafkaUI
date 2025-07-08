@@ -3,13 +3,24 @@
 
 <head>
     <meta charset="UTF-8" />
-
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';" <!--
-        </head>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
+    <title>App with Sidebar</title>
+   
+
+</head>
 
 <body>
-    <app></app>
+    <div class="sidebar">
+        <h2>Kafka UI</h2>
+        <button id="page_start">Zookeeper & Server</button>
+        <button id="page_listTopic">Topic</button>
+    </div>
+
+    <div class="content">
+        <app></app>
+    </div>
+
 
 </body>
 <script type="module" src="./renderer.js"></script>

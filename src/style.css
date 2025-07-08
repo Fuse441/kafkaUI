@@ -1,0 +1,88 @@
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+        }
+        body, html, app {
+  height: 95vh;
+  margin: 0;
+}
+
+        .sidebar {
+            width: 220px;
+            background-color: #1f1f1f;
+ 
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar h2 {
+            color: #00ff99;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+ .sidebar button {
+          margin: 5px;
+        }
+        .sidebar a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 12px 20px;
+            transition: background 0.3s, color 0.3s;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #333;
+            color: #00ff99;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        /* Theme scan: Add accent color and button styles */
+        :root {
+            --accent-color: #00ff99;
+            --background-dark: #121212;
+            --sidebar-bg: #1f1f1f;
+            --text-light: #fff;
+            --text-muted: #ccc;
+        }
+
+        button, .btn {
+            background-color: var(--accent-color);
+            color: var(--background-dark);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        button:hover, .btn:hover {
+            background-color: #00cc77;
+            color: var(--text-light);
+        }
+
+        input, select, textarea {
+            background: #232323;
+            color: var(--text-light);
+            border: 1px solid #333;
+            border-radius: 3px;
+            padding: 8px;
+            margin-bottom: 12px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(0,255,153,0.2);
+        }
